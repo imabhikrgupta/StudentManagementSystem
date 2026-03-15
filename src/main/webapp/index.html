@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Management System</h1>
+        
+        <nav>
+            <button onclick="navigate('/register')">Register Student</button>
+            <button onclick="navigate('/login')">Login</button>
+            <button onclick="navigate('/view')">View Students</button>
+            <button onclick="navigate('/update')">Update Student</button>
+            <button onclick="navigate('/delete')">Delete Student</button>
+        </nav>
+
+        <div id="content">
+            <p>Select an action above to proceed.</p>
+        </div>
+    </div>
+</body>
+</html>
