@@ -48,18 +48,23 @@ public class UpdateStudentServlet extends HttpServlet {
 
 			Connection con = StudentDB.getCon();
 
-			PreparedStatement ps = con.prepareStatement("UPDATE student SET smail=?,sphone=? WHERE roll_no=?");
+			PreparedStatement ps = con.prepareStatement(
+				    "UPDATE student SET SMAIL=?, SPHONE=? WHERE ROLL_NO=?"
+				);
 
-			ps.setString(1, email);
-			ps.setLong(2, phone);
-			ps.setInt(3, roll);
+				ps.setString(1, email);
+				ps.setLong(2, phone);
+				ps.setInt(3, roll);
 
-			int rows = ps.executeUpdate();
+				int rows = ps.executeUpdate();
 
-			if (rows > 0)
-				out.println("Student Updated Successfully");
-			else
-				out.println("Student Not Found");
+				if (rows > 0) {
+				    out.println("<h1 style='color:green'>Student Updated Successfully</h1>");
+				} else {
+				    out.println("<h1 style='color:red'>Student Not Found</h1>");
+				}
+
+
 
 		}  catch (NumberFormatException nfe) {
 		    out.println("Invalid number format: " + nfe.getMessage());

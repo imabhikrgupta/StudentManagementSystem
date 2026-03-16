@@ -4,23 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class StudentDB {
-    private static Connection con;
-
     public static Connection getCon() {
+        Connection con = null;
         try {
-            if (con == null || con.isClosed()) {
-                Class.forName("oracle.jdbc.driver.OracleDriver");
+            // Read values from environment variables
+        	String url  = "jdbc:mysql://localhost:3306/abhidb";
+        	String user = "root";
+        	String pass = "Abhishek@09";
 
-                // Use service name XEPDB1 for Oracle XE 21c
-                String url = "jdbc:oracle:thin:@localhost:1521:XE";
-                String userid = "studentdb";
-                String password = "stu123";
-
-                con = DriverManager.getConnection(url, userid, password);
-                System.out.println("Connection established successfully!");
-            }
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+        	 con = DriverManager.getConnection(url, user, pass);
         } catch (Exception e) {
-            System.out.println("DB Connection failed: " + e.getMessage());
             e.printStackTrace();
         }
         return con;

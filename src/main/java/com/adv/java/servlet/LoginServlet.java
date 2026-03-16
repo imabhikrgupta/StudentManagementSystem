@@ -12,6 +12,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class LoginServlet extends HttpServlet {
 
@@ -41,17 +42,36 @@ public class LoginServlet extends HttpServlet {
 
 			Connection con = StudentDB.getCon();
 
-			PreparedStatement ps = con.prepareStatement("SELECT * FROM student WHERE smail=? AND sphone=?");
+			 PreparedStatement ps = con.prepareStatement(
+		                "SELECT ROLL_NO, SNAME, SMARK, SFNAME, SLNAME, SMAIL, SPHONE FROM student WHERE SMAIL=? AND SPHONE=?"
+		            );
+		            ps.setString(1, email);
+		            ps.setLong(2, phone);
 
-			ps.setString(1, email);
-			ps.setLong(2, phone);
+		            ResultSet rs = ps.executeQuery();
 
-			ResultSet rs = ps.executeQuery();
+		            if (rs.next()) {
+		                // Store student info in session
+		                HttpSession session = req.getSession();
+		                session.setAttribute("roll", rs.getInt("ROLL_NO"));
+		                session.setAttribute("name", rs.getString("SNAME"));
+		                session.setAttribute("mark", rs.getDouble("SMARK"));
+		                session.setAttribute("fname", rs.getString("SFNAME"));
+		                session.setAttribute("lname", rs.getString("SLNAME"));
+		                session.setAttribute("email", rs.getString("SMAIL"));
+		                session.setAttribute("phone", rs.getLong("SPHONE"));
+//		                session.setAttribute("img", rs.getString("SIMG")); // profile image path
 
-			if (rs.next())
-				out.println("<h1>Login Successfully !</h1>");
+
+		                out.println("<h1 style='color:green'>Login Successful!</h1>");
+				
+				// Redirect to profile page
+				res.sendRedirect("profile.jsp");
+			//res.sendRedirect("dashboard");
+				
+			}
 			else
-				out.println("Invalid Login");
+				out.println("<h1 style='color:red'>Invalid Login</h1>");
 
 		} catch (NumberFormatException nfe) {
 			out.println("Invalid number format: " + nfe.getMessage());
@@ -60,4 +80,5 @@ public class LoginServlet extends HttpServlet {
 		}
 
 	}
+	
 }

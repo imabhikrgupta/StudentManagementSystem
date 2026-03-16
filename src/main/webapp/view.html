@@ -1,13 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>View Students</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0; padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        tr:hover {
+            background: #f1f1f1;
+        }
+        @media (max-width: 600px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th {
+                position: sticky;
+                top: 0;
+            }
+            td {
+                text-align: left;
+                padding-left: 50%;
+                position: relative;
+            }
+            td:before {
+                position: absolute;
+                left: 10px;
+                white-space: nowrap;
+                font-weight: bold;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>View All Students</h2>
-    <form action="view" method="get">
-        <input type="submit" value="Show Students">
-    </form>
+    <div class="container">
+        <h2>Student List</h2>
+        <!-- The servlet will inject table rows here -->
+        <table>
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Marks</th>
+                <th>Father</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+            </tr>
+            <!-- Example row (actual rows come from ViewStudentsServlet) -->
+            <!--
+            <tr>
+                <td>1</td>
+                <td>Abhishek</td>
+                <td>95.5</td>
+                <td>Ramesh</td>
+                <td>Kumar</td>
+                <td>abhishek@mail.com</td>
+                <td>9876543210</td>
+            </tr>
+            -->
+        </table>
+    </div>
 </body>
 </html>

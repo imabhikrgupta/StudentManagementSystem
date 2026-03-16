@@ -30,16 +30,20 @@ public class DeleteStudentServlet extends HttpServlet {
 
 			Connection con = StudentDB.getCon();
 
-			PreparedStatement ps = con.prepareStatement("DELETE FROM student WHERE roll_no=?");
+			PreparedStatement ps = con.prepareStatement(
+				    "DELETE FROM student WHERE ROLL_NO=?"
+				);
 
-			ps.setInt(1, roll);
+				ps.setInt(1, roll);
 
-			int rows = ps.executeUpdate();
+				int rows = ps.executeUpdate();
 
-			if (rows > 0)
-				out.println("<h1>Student Deleted</h1>");
-			else
-				out.println("Student Not Found");
+				if (rows > 0) {
+				    out.println("<h1 style='color:green'>Student Deleted</h1>");
+				} else {
+				    out.println("<h1 style='color:red'>Student Not Found</h1>");
+				}
+
 
 		} catch (Exception e) {
 			out.println(e);

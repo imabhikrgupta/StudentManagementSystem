@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 
 import com.adv.java.db.StudentDB;
 
@@ -21,9 +22,8 @@ public class ViewStudentsServlet extends HttpServlet {
 
         try {
             Connection con = StudentDB.getCon();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM student");
-            ResultSet rs = ps.executeQuery();
-
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM student");
             out.println("<html><head><title>Students</title>");
             out.println("<link rel='stylesheet' href='style.css'>");
             out.println("</head><body>");

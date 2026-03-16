@@ -23,35 +23,31 @@ public class RegisterServlet extends HttpServlet {
 
         try {
             // Get parameters safely
-            String rollStr = req.getParameter("roll");
-            String markStr = req.getParameter("mark");
-            String phoneStr = req.getParameter("phone");
+        	String markStr = req.getParameter("mark");
+        	String phoneStr = req.getParameter("phone");
 
-            if (rollStr == null || markStr == null || phoneStr == null) {
-                out.println("Missing required fields!");
-                return;
-            }
+        	if (markStr == null || phoneStr == null) {
+        	    out.println("Missing required fields!");
+        	    return;
+        	}
 
-            int roll = Integer.parseInt(rollStr);
-            String name = req.getParameter("name");
-            double mark = Double.parseDouble(markStr);
-            String fname = req.getParameter("fname");
-            String lname = req.getParameter("lname");
-            String email = req.getParameter("email");
-            long phone = Long.parseLong(phoneStr);
-
+        	// remove rollStr entirely
+        	String name  = req.getParameter("name");
+        	double mark  = Double.parseDouble(markStr);
+        	String fname = req.getParameter("fname");
+        	String lname = req.getParameter("lname");
+        	String email = req.getParameter("email");
+        	long phone   = Long.parseLong(phoneStr);
             Connection con = StudentDB.getCon();
             PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO student VALUES(?,?,?,?,?,?,?)"
-            );
-
-            ps.setInt(1, roll);
-            ps.setString(2, name);
-            ps.setDouble(3, mark);
-            ps.setString(4, fname);
-            ps.setString(5, lname);
-            ps.setString(6, email);
-            ps.setLong(7, phone);
+            	    "INSERT INTO student (SNAME, SMARK, SFNAME, SLNAME, SMAIL, SPHONE) VALUES (?, ?, ?, ?, ?, ?)"
+            	);
+            	ps.setString(1, name);      // SNAME
+            	ps.setDouble(2, mark);      // SMARK
+            	ps.setString(3, fname);     // SFNAME
+            	ps.setString(4, lname);     // SLNAME
+            	ps.setString(5, email);     // SMAIL
+            	ps.setLong(6, phone);       // SPHONE
 
             int rows = ps.executeUpdate();
             if (rows > 0) {
