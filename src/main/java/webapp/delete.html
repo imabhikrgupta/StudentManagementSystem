@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            margin: 0; padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 25px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input[type=text] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        input[type=submit] {
+            width: 100%;
+            padding: 12px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type=submit]:hover {
+            background: #d32f2f;
+        }
+        .note {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+        }
+        @media (max-width: 600px) {
+            .container { margin: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Delete Student</h2>
+        <form action="DeleteStudentServlet" method="post">
+            <input type="text" name="roll" placeholder="Enter Roll No" required>
+            <input type="submit" value="Delete">
+        </form>
+        <div class="note">
+            <p>Enter the Roll No of the student you want to delete.</p>
+        </div>
+    </div>
+</body>
+</html>
