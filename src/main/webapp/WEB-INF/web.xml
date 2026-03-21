@@ -49,5 +49,7 @@
         <servlet-name>DeleteStudentServlet</servlet-name>
         <url-pattern>/DeleteStudentServlet</url-pattern>
     </servlet-mapping>
-
+    <listener>
+    <listener-class>com.adv.java.PortConfigListener</listener-class>
+</listener>
 </web-app>
